@@ -2,12 +2,6 @@
 
 My configs and some Bash scripts
 
-## Auto-configure
-
-```bash
-git clone https://github.com/constellationz/dotfiles ~/.rep/dotfiles && bash ~/.rep/dotfiles/bin/configure --auto
-```
-
 ## The `configure` script
 
 The `configure` script automatically installs packages and copies configs.
@@ -23,4 +17,4 @@ configure [--auto]
 
 ## Attribution
 
-`constellationz/dotfiles` is licensed under the MIT license.
+`dotfiles` is licensed under the MIT license.
