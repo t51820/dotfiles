@@ -1,0 +1,8 @@
+echo host: `whoami`@`hostname`: `uname -a`
+echo packages: dpkg `sudo dpkg-query -l | wc -l`
+echo uptime: `uptime`
+export EDITOR=vi
+echo editor: `echo $EDITOR`
+echo shell: `echo $SHELL`
+echo terminal: `echo $TTY`
+echo network: `ip a show dev wlp11s0 | grep /24`
