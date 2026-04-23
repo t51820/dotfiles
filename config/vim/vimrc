@@ -39,3 +39,6 @@ set laststatus=0
 
 " Use low update time
 set updatetime=50
+
+" No highlights
+syntax off
