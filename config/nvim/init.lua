@@ -60,6 +60,9 @@ do
 
     -- Messages from netrw use echoerr
     vim.g.netrw_use_errorwindow = 0
+
+    -- use vim colors
+    vim.cmd.colorscheme('vim')
 end
 
 -- LSP server configuration
