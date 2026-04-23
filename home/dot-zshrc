@@ -48,6 +48,9 @@ alias rep='cd $REPDIR'
 alias rm='rm -i'
 alias su='su -l -c "cd $(pwd) && bash"'
 
+# Do not bother me on typos
+unset command_not_found_handle
+
 # Alias venv
 if  [[ -f "$HOME/.venv/bin/activate" ]]; then
     alias venv='source $HOME/.venv/bin/activate'

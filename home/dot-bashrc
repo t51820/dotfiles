@@ -34,6 +34,9 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # Program settings
 export CARGO_TERM_COLOR=never
 
+# Do not bother me on typos
+unset command_not_found_handle
+
 # If not running interactively, don't set aliases
 [[ $- != *i* ]] && return
 
