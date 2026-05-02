@@ -48,17 +48,27 @@ mkdir -p "$LOGDIR"
 # One-directional sync (with deletion)
 # Make sure to do dry-run before initiating actual transfer
 echo "syncing $SYNCDIR/ -> $TO/"
-rsync \
-  --recursive \
-  --links \
-  --devices \
-  --specials \
-  --checksum \
-  --compress \
-  --delete-after \
-  --partial \
-  --progress \
-  --verbose \
-  --exclude '.hist' \
-  "$SYNCDIR/" "$TO/" | tee -a $LOGFILE
-echo "bak: rsync $SYNCDIR/ -> $TO/ complete"
+
+# Rsync arguments
+# These are --archive without the modification date option
+RSYNC_ARGS="--recursive --links --devices --specials --checksum --compress --delete-after --partial --progress --verbose --exclude '.hist'"
+
+# Run dry-run first to show what will be transferred
+echo ""
+echo "Performing dry-run $SYNCDIR/ -> $TO/"
+rsync $RSYNC_ARGS --dry-run "$SYNCDIR/" "$TO/"
+
+# Ask for confirmation
+echo ""
+read -p "Proceed with transfer? [yN] " -r
+echo ""
+
+# If user confirms (or presses enter), run the actual transfer
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo "Syncing $SYNCDIR/ -> $TO/"
+  rsync $RSYNC_ARGS "$SYNCDIR/" "$TO/" | tee -a $LOGFILE
+  echo "bak: rsync $SYNCDIR/ -> $TO/ complete"
+else
+  echo "Cancelled by user."
+  exit 0
+fi
