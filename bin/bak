@@ -49,7 +49,11 @@ mkdir -p "$LOGDIR"
 # Make sure to do dry-run before initiating actual transfer
 echo "syncing $SYNCDIR/ -> $TO/"
 rsync \
-  --archive \
+  --recursive \
+  --links \
+  --devices \
+  --specials \
+  --checksum \
   --compress \
   --delete-after \
   --partial \
