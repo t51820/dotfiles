@@ -37,8 +37,6 @@ DESTDIR="/home/$(hostname -s)"
 LOGDIR="$HOME/rsynclog"
 # Logfile to write to
 LOGFILE="$LOGDIR/sync-$REMOTE-log.txt"
-# ssh command to use for rsync
-RSYNC_RSH="ssh -p 1183 -i ~/.ssh/hopper"
 # The exact rsync destination (directory) to sync to
 TO="$(whoami)@$REMOTE:$DESTDIR"
 
