@@ -27,7 +27,7 @@ fi
 # Exit if not defined
 REMOTE="$1"
 if [ -z "$REMOTE" ]; then
-  echo "Usage: $(basename $0) hopper.wg0"
+  echo "Usage: $(basename "$0") hopper.wg0"
   exit 2
 fi
 
@@ -64,7 +64,7 @@ echo ""
 # If user confirms (or presses enter), run the actual transfer
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   echo "Syncing $SYNCDIR/ -> $TO/"
-  rsync $RSYNC_ARGS "$SYNCDIR/" "$TO/" | tee -a $LOGFILE
+  rsync $RSYNC_ARGS "$SYNCDIR/" "$TO/" | tee -a "$LOGFILE"
   echo "bak: rsync $SYNCDIR/ -> $TO/ complete"
 else
   echo "Cancelled by user."
