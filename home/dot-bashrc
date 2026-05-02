@@ -6,17 +6,24 @@ repdirs=(
     "$HOME/Repositories"
     "$HOME/rep"
 )
-for rep in "${repdirs[@]}"; do
-    if [[ -x "$rep" ]]; then
-        REPDIR="$rep"
+for dir in "${repdirs[@]}"; do
+    if [[ -x "$dir" ]]; then
+        REPDIR="$dir"
         break
     fi
 done
 
-# Get dotfiles
-if [[ -x "$REPDIR" && -x "$REPDIR/dotfiles" ]]; then
-    DOTFILES="$REPDIR/dotfiles"
-fi
+# Dotfiles can be in any of these
+dotdirs=(
+    "$HOME/dotfiles"
+    "$HOME/.dotfiles"
+)
+for dir in "${dotdirs[@]}"; do
+    if [[ -x "$dir" ]]; then
+        DOTFILES="$dir"
+        break
+    fi
+done
 
 # Add paths
 PATH="$PATH:$DOTFILES/bin"
