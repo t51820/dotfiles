@@ -36,7 +36,7 @@ PATH="$PATH:/sbin:/usr/sbin:/usr/local/sbin"
 PATH="$PATH:/usr/sbin"
 
 # Program settings
-export CARGO_TERM_COLOR=never
+# export CARGO_TERM_COLOR=never
 
 # If not running interactively, don't set aliases
 [[ $- != *i* ]] && return
