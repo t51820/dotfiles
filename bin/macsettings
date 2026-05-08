@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Change some mac settings that arent in settings panel
+
+defaults write -g ApplePressAndHoldEnabled -bool false
