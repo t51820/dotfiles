@@ -1,6 +1,6 @@
 [user]
 	name = tyler
-	email = tyler@luna.local
+	email = tyler
 [core]
 	editor = vim
 	excludesfile = /Users/tyler/.gitignore_global
