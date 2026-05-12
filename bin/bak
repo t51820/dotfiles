@@ -49,7 +49,7 @@ echo "syncing $SYNCDIR/ -> $TO/"
 
 # Rsync arguments
 # These are --archive without the modification date option
-RSYNC_ARGS="--recursive --links --devices --specials --checksum --compress --delete-after --partial --progress --verbose --exclude '.hist'"
+RSYNC_ARGS="--recursive --links --devices --specials --compress --times --delete-after --partial --progress --verbose --exclude '.hist'"
 
 # Run dry-run first to show what will be transferred
 echo ""
