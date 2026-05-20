@@ -39,7 +39,9 @@ PATH="$PATH:/usr/sbin"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Program settings
-# export CARGO_TERM_COLOR=never
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 
 # Do not bother me on typos
 unset command_not_found_handle
