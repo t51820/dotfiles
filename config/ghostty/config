@@ -1,7 +1,1 @@
-# Theme
 theme = dark:Nvim Dark,light:Nvim Light
-
-# Block cursor
-cursor-style = block
-cursor-style-blink = false
-shell-integration-features = no-cursor
