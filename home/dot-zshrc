@@ -65,12 +65,6 @@ if  [[ -f "$HOME/.venv/bin/activate" ]]; then
     alias venv='source $HOME/.venv/bin/activate'
 fi
 
-# Set nvim as vi
-if command -v nvim &>/dev/null; then
-	alias vi='nvim'
-	alias e='nvim'
-fi
-
 # On MacOS, c is pbcopy
 if command -v pbcopy &>/dev/null; then
 	alias c='pbcopy'
