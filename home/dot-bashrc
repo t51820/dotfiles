@@ -55,6 +55,7 @@ PS1="\u@\h:\w$SYMBOL "
 
 # Aliases
 alias desk='cd $HOME/Desktop'
+alias down='cd $HOME/Downloads'
 alias dots='cd $DOTFILES'
 alias eza='eza --color=auto'
 alias ls='ls --color=auto'
