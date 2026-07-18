@@ -50,6 +50,8 @@ move_exts jpg pictures
 move_exts mov pictures
 move_exts mp4 pictures
 move_exts png pictures
+move_exts webp pictures
+move_exts webm pictures
 move_exts gif pictures
 move_exts pdf pdf
 move_exts zip zip
