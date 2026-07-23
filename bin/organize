@@ -45,6 +45,7 @@ move_exts() {
 }
 
 move_exts dmg dmg
+move_exts pkg dmg
 move_exts jpeg pictures
 move_exts jpg pictures
 move_exts mov pictures
