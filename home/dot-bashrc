@@ -44,6 +44,9 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 
+# Export editor
+export EDITOR=vim
+
 # Do not bother me on typos
 unset command_not_found_handle
 
