@@ -64,6 +64,7 @@ move_exts kra krita
 move_exts webarchive webarchive
 move_exts graphite graphite
 move_exts svg svg
+move_exts stl stl
 move_exts org org
 move_exts ical calendar
 move_exts ics calendar
