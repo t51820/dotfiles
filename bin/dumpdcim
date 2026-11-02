@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rsync -AvurpP /Volumes/NIKON\ Z\ 7\ \ /DCIM/ hopper.local:/home/dcim/Z_7/
