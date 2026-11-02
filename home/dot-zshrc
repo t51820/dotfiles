@@ -50,6 +50,9 @@ export EDITOR=vim
 # Set PS1 (zsh specific)
 PS1="%n@%m %1~ %# "
 
+# Set options
+setopt interactivecomments
+
 # Aliases
 alias desk='cd "$HOME/Desktop"'
 alias down='cd "$HOME/Downloads"'
