@@ -2,34 +2,31 @@
 # Set wallpaper with pscircle, convert, and awww
 
 # Make sure programs are installed
-for i in pscircle awww convert; do
-  if ! command -v $i &>/dev/null; then
-    echo "$i not installed"
+for cmd in pscircle awww awww-daemon convert timeout pidof; do
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "$cmd not installed" >&2
     exit 1
   fi
 done
 
-# Get arguments
+# Wallpaper settings
 display=HDMI-A-1
 background=~/.config/sway/wallpapers/gemini.svg
 width=3840
 height=2160
 
 # Render the background once at the target resolution.
-background_png=/tmp/wallpaper.png
-background_tmp=$(mktemp /tmp/pswallpaper-bg.XXXXXX) || exit 1
-if ! convert -background none "$background" -resize "${width}x${height}!" "png:$background_tmp" ||
-   ! mv -fT -- "$background_tmp" "$background_png"; then
-  rm -f -- "$background_tmp"
-  exit 1
-fi
-trap 'rm -f -- "$background_png"' EXIT
+tmp_dir=$(mktemp -d) || exit 1
+trap 'rm -rf -- "$tmp_dir"' EXIT
+background_png="$tmp_dir/background.png"
+wallpaper="$tmp_dir/wallpaper.png"
+convert -background none "$background" -resize "${width}x${height}!" "$background_png" || exit 1
 
 # Generate wallpaper
-function gen {
+generate_wallpaper() {
   ps -e -o pid,ppid,pcpu,rss,comm --no-headers \
     | pscircle --stdin=1 \
-      --output=$1 \
+      --output="$1" \
       --output-width=$width \
       --output-height=$height \
       --max-children=40 \
@@ -71,18 +68,17 @@ function gen {
       --memory-max-value=104857600 # 1024 * 1024 * 100
 }
 
-awww-daemon --no-cache &
-while true
-do
-  # Break when awww-daemon is no longer running
-  if ! pidof awww-daemon &>/dev/null; then
-    break
-  fi
+awww-daemon --no-cache >/dev/null 2>&1 &
+if ! timeout 5s bash -c 'until awww query >/dev/null 2>&1; do sleep 0.1; done'; then
+  echo "awww-daemon did not become ready within 5 seconds" >&2
+  exit 1
+fi
 
-  # Generate wallpaper
-  wallpaper=$(mktemp /tmp/pswallpaper_XXXXX)
-  gen $wallpaper
-  awww img --outputs $display --transition-type none $wallpaper
-  rm $wallpaper
+while pidof awww-daemon &>/dev/null; do
+  if generate_wallpaper "$wallpaper"; then
+    awww img --outputs "$display" --transition-type none "$wallpaper"
+  else
+    echo "Failed to generate wallpaper" >&2
+  fi
   sleep 10
 done
