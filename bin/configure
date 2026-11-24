@@ -5,6 +5,7 @@
 # - Links configs
 
 SCRIPT_DIR="$(dirname $0)"
+DOTS="$SCRIPT_DIR/../"
 LOCAL_BIN="$HOME/.local/bin"
 
 # Should core packages be auto-installed?
@@ -32,7 +33,7 @@ function pull_repo {
 	containingdir="$2"
 	repo=$(basename "$link")
 	if [ ! -d "$containingdir/$repo" ]; then
-		git clone --depth=1 "$link" "$containingdir/$repo" 
+		git clone --depth=1 "$link" "$containingdir/$repo"
 	else
 		echo "Already pulled $repo"
 	fi
@@ -209,36 +210,27 @@ if [[ AUTO -eq 0 ]] && yes_or_no "Configure desktop?"; then
 
 	# Optionally download themes
 	if yes_or_no "Download themes?"; then
+    	sudo apt-get install -y \
+    		papirus-icon-theme
+
 		echo "Making directories"
 		mkdir --parents ~/.icons
 		mkdir --parents ~/.themes
-		
-		echo "Downloading themes"
-		cd /tmp/
-		wget https://github.com/constellationz/gruvbox-material-gtk/releases/download/latest/Gruvbox-Material-Dark.tar.gz
-		tar -xvf Gruvbox-Material-Dark.tar.gz
-		cp -r Gruvbox-Material-Dark ~/.themes/
-		yes | rm -r Gruvbox-Material-Dark.tar.gz &>/dev/null
-
-		echo "Pulling sources"
-		pull_repo https://github.com/constellationz/gruvbox-icons ~/.rep
-		pull_repo https://github.com/constellationz/simp1e-gruvbox-dark ~/.rep
-		pull_repo https://github.com/PapirusDevelopmentTeam/papirus-icon-theme ~/.rep
 
 		echo "Linking themes"
-		rsync --recursive --links ~/.rep/gruvbox-icons/ \
+		rsync --recursive --links $DOTS/themes/gruvbox-icons/ \
 			~/.icons/Gruvbox-Icons/
-		rsync --recursive --links ~/.rep/simp1e-gruvbox-dark/ \
-			~/.icons/Simp1e-Gruvbox-Dark/
-		rsync --recursive --links ~/.rep/papirus-icon-theme/Papirus-Dark/ \
-			~/.icons/Papirus-Dark/
+		rsync --recursive --links $DOTS/themes/gruvbox-cursor/ \
+			~/.icons/Gruvbox-Cursor/
+		rsync --recursive --links $DOTS/themes/gruvbox-gtk/ \
+			~/.themes/Gruvbox-Gtk/
 
 		# After downloading themes, optionally set themes
 		if yes_or_no "Set themes & fonts via gsettings?"; then
 			echo "Updating theme with gsettings"
-			gsettings set org.gnome.desktop.interface gtk-theme 'Gruvbox-Material-Dark'
+			gsettings set org.gnome.desktop.interface gtk-theme 'Gruvbox-Dark'
 			gsettings set org.gnome.desktop.interface icon-theme 'Gruvbox-Icons'
-			gsettings set org.gnome.desktop.interface cursor-theme 'Simp1e-Gruvbox-Dark'
+			gsettings set org.gnome.desktop.interface cursor-theme 'Gruvbox-Cursor'
 			gsettings set org.gnome.desktop.interface font-name 'FreeSans 11'
 			gsettings set org.gnome.desktop.interface document-font-name 'FreeSans 11'
 			gsettings set org.gnome.desktop.interface monospace-font-name 'Hack 11'

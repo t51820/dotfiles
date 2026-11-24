@@ -179,7 +179,7 @@
     # Set icon theme (only used for recursive icon lookup)
     # You can also set multiple icon themes, with the leftmost one being used first.
     # icon_theme = "Adwaita, breeze"
-    icon_theme = Gruvbox-Material-Dark, Papirus-Dark
+    icon_theme = "Gruvbox-Icons, Papirus-Dark"
 
     # Align icons left/right/top/off
     icon_position = right

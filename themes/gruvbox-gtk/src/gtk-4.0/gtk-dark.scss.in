@@ -1,0 +1,7 @@
+@use "@current_source_dir@/../theme" with (
+  $dark-theme: true,
+  $toolkit: "gtk4"
+);
+@use "@current_source_dir@/sass/gtk" with ($version: @version@);
+@use "@current_source_dir@/sass/common";
+@use "@current_source_dir@/../gtk-3.0/sass/public-colors";

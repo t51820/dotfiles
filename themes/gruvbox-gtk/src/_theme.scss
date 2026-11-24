@@ -1,0 +1,53 @@
+$dark-theme: false !default;
+$toolkit: "none" !default;
+
+$asset-suffix: if($dark-theme, "-dark", "");
+
+//
+// Sizes
+//
+
+$container-padding: 4px;
+$small-size: 24px;
+$medium-size: 32px;
+$large-size: 40px;
+
+$menu-item-height: 28px;
+$menu-item-dense-height: 28px;
+
+//
+// Radii
+//
+
+$corner-radius: 4px;
+$circular-radius: 9999px;
+
+//
+// Durations
+//
+
+$state-duration: 50ms;
+$ripple-duration: 200ms;
+$ripple-fade-out-duration: 200ms;
+$ripple-opacity-fade-out-duration: 200ms;
+
+// Tweak transition durations since St does not support transition-timing-function
+@if $toolkit == "st" {
+  $state-duration: 50ms;
+  $ripple-duration: 200ms;
+}
+
+//
+// Timing functions
+//
+
+$ease: cubic-bezier(.4, 0, .2, 1);
+$ease-out: cubic-bezier(0, 0, .2, 1);
+$ease-in: cubic-bezier(.4, 0, 1, 1);
+$ease-in-out: cubic-bezier(.4, 0, .6, 1);
+
+//
+// Transition shorthands
+//
+
+$transition: all $state-duration $ease-out;

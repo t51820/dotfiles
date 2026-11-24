@@ -1,0 +1,26 @@
+option(
+  'theme_name',
+  type: 'string',
+  value: 'Gruvbox',
+  description: 'Base theme name',
+)
+
+option(
+  'colors',
+  type: 'array',
+  choices: ['Light', 'Dark'],
+  description: 'List of color variants to build',
+)
+
+option(
+  'gtk4_version',
+  type: 'string',
+  description: 'Build GTK 4 theme for specific version',
+)
+
+option(
+  'flatpak',
+  type: 'boolean',
+  value: false,
+  description: 'Whether to build theme for flatpak package',
+)

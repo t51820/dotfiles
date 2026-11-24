@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=@theme_name@
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=@theme_name@
+MetacityTheme=@theme_name@
+IconTheme=Gruvbox-Icons
+CursorTheme=Gruvbox-Cursor
+CursorSize=24
