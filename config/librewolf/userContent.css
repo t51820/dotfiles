@@ -1,0 +1,49 @@
+/* Gruvbox Dark for LibreWolf Settings only. */
+@-moz-document url-prefix("about:preferences"), url-prefix("about:settings") {
+  :root, body {
+    color-scheme: dark !important;
+    --background-color-canvas: #282828 !important;
+    --background-color-box: #3c3836 !important;
+    --text-color: #ebdbb2 !important;
+    --text-color-deemphasized: #a89984 !important;
+    --border-color: #504945 !important;
+    --link-color: #83a598 !important;
+    --link-color-hover: #8ec07c !important;
+    --link-color-active: #8ec07c !important;
+    --link-color-visited: #d3869b !important;
+    --color-accent-primary: #83a598 !important;
+    --color-accent-primary-hover: #8ec07c !important;
+    --color-accent-primary-active: #689d6a !important;
+    --color-accent-primary-text: #282828 !important;
+    --button-background-color: #3c3836 !important;
+    --button-background-color-hover: #504945 !important;
+    --button-background-color-active: #665c54 !important;
+    --button-text-color: #ebdbb2 !important;
+    --in-content-page-background: #282828 !important;
+    --in-content-page-color: #ebdbb2 !important;
+    background-color: #282828 !important;
+    color: #ebdbb2 !important;
+  }
+
+  #categories > .category:not([selected]):hover {
+    background-color: #3c3836 !important;
+  }
+  #categories > .category[selected] {
+    background-color: #3c3836 !important;
+    color: #8ec07c !important;
+  }
+  #searchInput {
+    background-color: #3c3836 !important;
+    color: #ebdbb2 !important;
+    border-color: #665c54 !important;
+  }
+  #searchInput:focus-within {
+    outline: 1px solid #83a598 !important;
+  }
+  a, .text-link {
+    color: #83a598 !important;
+  }
+  a:hover, .text-link:hover {
+    color: #8ec07c !important;
+  }
+}
