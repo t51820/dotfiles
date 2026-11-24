@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Set wallpaper with bg and pscircle
-# e.g. pswallpaper HDMI-A-1 ~/Pictures/Wallpapers/wallpaper.png
+# Set wallpaper with pscircle, convert, and awww
 
 # Make sure programs are installed
 for i in pscircle awww convert; do
@@ -72,7 +71,7 @@ function gen {
       --memory-max-value=104857600 # 1024 * 1024 * 100
 }
 
-awww init --no-cache &>/dev/null
+awww-daemon --no-cache &
 while true
 do
   # Break when awww-daemon is no longer running
