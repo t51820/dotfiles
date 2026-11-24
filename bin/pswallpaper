@@ -3,7 +3,7 @@
 # e.g. pswallpaper HDMI-A-1 ~/Pictures/Wallpapers/wallpaper.png
 
 # Make sure programs are installed
-for i in pscircle swww convert; do
+for i in pscircle awww convert; do
   if ! command -v $i &>/dev/null; then
     echo "$i not installed"
     exit 1
@@ -11,16 +11,20 @@ for i in pscircle swww convert; do
 done
 
 # Get arguments
-display=$1
-background=$2
-width=2560
-height=1080
+display=HDMI-A-1
+background=~/.config/sway/wallpapers/gemini.svg
+width=3840
+height=2160
 
-# Make sure background exists
-if [ ! -f $background ]; then
-  echo "Could not find background $background"
-  exit 2
+# Render the background once at the target resolution.
+background_png=/tmp/wallpaper.png
+background_tmp=$(mktemp /tmp/pswallpaper-bg.XXXXXX) || exit 1
+if ! convert -background none "$background" -resize "${width}x${height}!" "png:$background_tmp" ||
+   ! mv -fT -- "$background_tmp" "$background_png"; then
+  rm -f -- "$background_tmp"
+  exit 1
 fi
+trap 'rm -f -- "$background_png"' EXIT
 
 # Generate wallpaper
 function gen {
@@ -29,9 +33,9 @@ function gen {
       --output=$1 \
       --output-width=$width \
       --output-height=$height \
-      --background-image=$background \
       --max-children=40 \
       --tree-radius-increment=10,150,100,80 \
+      --scale=1.75 \
       --max-proc-name-len=10 \
       --root-label-angle=0 \
       --dot-radius=3 \
@@ -50,7 +54,8 @@ function gen {
       --toplists-font-face=Hack \
       --toplists-font-color=A89984FF \
       --toplists-pid-font-color=A89984FF \
-      --background-color=28282800 \
+      --background-color=282828FF \
+      --background-image="$background_png" \
       --dot-color-min=427B58FF \
       --dot-color-max=8EC07CFF \
       --dot-border-color-min=00000000 \
@@ -67,18 +72,18 @@ function gen {
       --memory-max-value=104857600 # 1024 * 1024 * 100
 }
 
-swww init --no-cache &>/dev/null
+awww init --no-cache &>/dev/null
 while true
 do
-  # Break when swww-daemon is no longer running
-  if ! pidof swww-daemon &>/dev/null; then
+  # Break when awww-daemon is no longer running
+  if ! pidof awww-daemon &>/dev/null; then
     break
   fi
 
   # Generate wallpaper
   wallpaper=$(mktemp /tmp/pswallpaper_XXXXX)
   gen $wallpaper
-  swww img --outputs $display --transition-type none $wallpaper
+  awww img --outputs $display --transition-type none $wallpaper
   rm $wallpaper
   sleep 10
 done
