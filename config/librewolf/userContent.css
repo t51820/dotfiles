@@ -1,5 +1,5 @@
-/* Gruvbox Dark for LibreWolf Settings only. */
-@-moz-document url-prefix("about:preferences"), url-prefix("about:settings") {
+/* Gruvbox Dark for LibreWolf's internal about: pages. */
+@-moz-document url-prefix("about:") {
   :root, body {
     color-scheme: dark !important;
     --background-color-canvas: #282828 !important;
